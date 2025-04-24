@@ -19,9 +19,7 @@
 - 🎨 Stylish modern UI with custom icons and dark theme
 
 ---
-
-> _(SS Place Holder)_
-
+![Screenshot from 2025-04-24 19-28-53](https://github.com/user-attachments/assets/2b1ffb56-276a-4a36-a822-57582ab9989a)
 ---
 
 ## 🛠️ Requirements
