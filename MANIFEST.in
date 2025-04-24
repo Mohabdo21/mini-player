@@ -1,0 +1,6 @@
+include src/icons/*.png
+include src/icons/*.svg
+include src/default_album.png
+include src/mini_player.ini
+include *.desktop
+include README.md

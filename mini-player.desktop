@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Mini Player
+Comment=Audio player with speed control
+Exec=/opt/miniplayer/MiniPlayer
+Icon=/opt/miniplayer/icons/mini-player.svg
+Categories=Audio;AudioVideo;Player;
+Terminal=false
+StartupWMClass=MiniPlayer
