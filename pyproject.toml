@@ -3,7 +3,7 @@ requires = ["setuptools>=67.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mini-player_mohannad21"	
+name = "mini-player_mohannad21"
 version = "1.0.0"
 authors = [
     {name = "Mohannad Abdulaziz", email = "mohannadabdo21@gmail.com"},
@@ -27,15 +27,15 @@ dependencies = ["PyQt6>=6.0.0", "mutagen>=1.45.1"]
 mini-player = "miniplayer.app:main"
 
 [tool.setuptools]
-packages = ["miniplayer"]
-package-dir = {"miniplayer" = "src"}
+packages = ["miniplayer", "miniplayer.core", "miniplayer.ui", "miniplayer.utils"]
+package-dir = {"miniplayer" = "src/miniplayer"}
 include-package-data = true
 
 [tool.setuptools.package-data]
 miniplayer = [
-    "icons/*",
-    "mini_player.ini", 
-    "default_album.png"
+    "../icons/*",
+    "../default_album.png",
+    "mini_player.ini"
 ]
 
 # Corrected data-files section - now using proper dictionary format

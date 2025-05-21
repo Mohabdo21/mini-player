@@ -3,13 +3,13 @@
 block_cipher = None
 
 a = Analysis(
-    ["src/app.py"],
+    ["main.py"],
     pathex=[],
     binaries=[
         ('/usr/lib/x86_64-linux-gnu/qt6/plugins/platforms/', 'qt6_plugins/platforms'),
         ('/usr/lib/x86_64-linux-gnu/qt6/plugins/xcbglintegrations/', 'qt6_plugins/xcbglintegrations')
 	],
-    datas=[
+    data=[
         ("src/icons/*", "icons"),
         ("src/default_album.png", "."),
         ("mini-player.desktop", "."),
@@ -31,7 +31,7 @@ exe = EXE(
     a.scripts,
     a.binaries,
     a.zipfiles,
-    a.datas,
+    a.data,
     [],
     name="MiniPlayer",
     debug=False,
@@ -48,4 +48,3 @@ exe = EXE(
     entitlements_file=None,
     icon="src/icons/mini-player.ico",
 )
-

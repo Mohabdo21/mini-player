@@ -86,7 +86,9 @@ class AudioApp(QWidget):
         self.album_art = QLabel()
         self.album_art.setObjectName("album_art")
         self.album_art.setFixedSize(80, 80)
-        self.album_art.setStyleSheet("background-color: #444; border-radius: 8px;")
+        self.album_art.setStyleSheet(
+            "background-color: #444; border-radius: 8px;"
+        )
         self.album_art.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.album_art.setPixmap(
             QPixmap(self.get_icon_path("default_album.png")).scaled(
@@ -368,12 +370,16 @@ class AudioApp(QWidget):
         self.timer.timeout.connect(self.update_progress)
         self.progress_bar.mousePressEvent = self.progress_bar_clicked
         self.file_list.itemSelectionChanged.connect(self.track_changed)
-        self.media_player.playbackStateChanged.connect(self.handle_playback_state)
+        self.media_player.playbackStateChanged.connect(
+            self.handle_playback_state
+        )
         self.volume_slider.valueChanged.connect(self.update_volume)
         self.btn_mute.toggled.connect(self.toggle_mute)
         self.fade_timer.timeout.connect(self.fade_step)
         self.search_bar.textChanged.connect(self.filter_tracks)
-        self.file_list.itemDoubleClicked.connect(self.play_double_clicked_track)
+        self.file_list.itemDoubleClicked.connect(
+            self.play_double_clicked_track
+        )
         self.media_player.mediaStatusChanged.connect(self.handle_media_status)
         self.btn_repeat.toggled.connect(self.on_repeat_toggled)
         self.btn_play_all.toggled.connect(self.on_play_all_toggled)
@@ -409,7 +415,9 @@ class AudioApp(QWidget):
                 self.play_audio()  # fallback if nothing playing yet
             else:
                 self.media_player.play()
-                self.btn_play_pause.setIcon(QIcon(self.get_icon_path("pause.png")))
+                self.btn_play_pause.setIcon(
+                    QIcon(self.get_icon_path("pause.png"))
+                )
                 self.btn_reset.setEnabled(True)
                 self.timer.start()
 
@@ -423,11 +431,16 @@ class AudioApp(QWidget):
         file_path = Path(self.current_folder) / rel_path
 
         if not file_path.exists():
-            QMessageBox.warning(self, "File Missing", f"Cannot find {file_path}")
+            QMessageBox.warning(
+                self, "File Missing", f"Cannot find {file_path}"
+            )
             return
 
         # Stop current playback if any
-        if self.media_player.playbackState() != QMediaPlayer.PlaybackState.StoppedState:
+        if (
+            self.media_player.playbackState()
+            != QMediaPlayer.PlaybackState.StoppedState
+        ):
             self.media_player.stop()
 
         # Set up and play the new track
@@ -530,7 +543,10 @@ class AudioApp(QWidget):
         """Update the speed label based on the slider value."""
         speed = self.slider.value() / 100
         self.slider_text.setText(f"Speed: {speed:.2f}x")
-        if self.media_player.playbackState() == QMediaPlayer.PlaybackState.PlayingState:
+        if (
+            self.media_player.playbackState()
+            == QMediaPlayer.PlaybackState.PlayingState
+        ):
             self.media_player.setPlaybackRate(speed)
         self.save_settings()
 
@@ -564,14 +580,18 @@ class AudioApp(QWidget):
     def open_file(self):
         """Open a file dialog to select an audio file or folder."""
         initial_dir = str(self.current_folder) if self.current_folder else ""
-        path = QFileDialog.getExistingDirectory(self, "Select Folder", initial_dir)
+        path = QFileDialog.getExistingDirectory(
+            self, "Select Folder", initial_dir
+        )
 
         if path:
             self.current_folder = path
             self.populate_file_list(path)
             self.save_settings()
         else:
-            file_filter = "Audio Files (*.mp3 *.flac *.wav *.ogg);;All Files (*)"
+            file_filter = (
+                "Audio Files (*.mp3 *.flac *.wav *.ogg);;All Files (*)"
+            )
             file, _ = QFileDialog.getOpenFileName(
                 self, "Select File", initial_dir, filter=file_filter
             )
@@ -588,7 +608,9 @@ class AudioApp(QWidget):
             return
 
         # Show progress
-        progress = QProgressDialog("Scanning folder...", "Cancel", 0, 100, self)
+        progress = QProgressDialog(
+            "Scanning folder...", "Cancel", 0, 100, self
+        )
         progress.setWindowModality(Qt.WindowModality.WindowModal)
         progress.show()
 
@@ -624,15 +646,20 @@ class AudioApp(QWidget):
         file_path = Path(self.current_folder) / rel_path
 
         if not file_path.exists():
-            QMessageBox.warning(self, "File Missing", f"Cannot find {file_path}")
+            QMessageBox.warning(
+                self, "File Missing", f"Cannot find {file_path}"
+            )
             return
 
         # Stop current playback if it's a different track
         current_file = (
-            Path(QUrl(self.current_track).path()) if self.current_track else None
+            Path(QUrl(self.current_track).path())
+            if self.current_track
+            else None
         )
         if (
-            self.media_player.playbackState() != QMediaPlayer.PlaybackState.StoppedState
+            self.media_player.playbackState()
+            != QMediaPlayer.PlaybackState.StoppedState
             and current_file != file_path
         ):
             self.media_player.stop()
@@ -688,12 +715,17 @@ class AudioApp(QWidget):
         start = self.track_scroll_index
 
         for i in range(1, len(full_text)):
-            if metrics.horizontalAdvance(full_text[start : start + i]) > visible_width:
+            if (
+                metrics.horizontalAdvance(full_text[start : start + i])
+                > visible_width
+            ):
                 break
 
         visible_text = full_text[start : start + i]
         self.track_label.setText(f"Now Playing: {visible_text}")
-        self.track_scroll_index = (self.track_scroll_index + 1) % len(full_text)
+        self.track_scroll_index = (self.track_scroll_index + 1) % len(
+            full_text
+        )
 
     def track_changed(self):
         """Handle changes in the selected track."""
@@ -753,7 +785,8 @@ class AudioApp(QWidget):
             if (
                 self.btn_repeat.isChecked()
                 and self.current_track
-                and self.media_player.position() == self.media_player.duration()
+                and self.media_player.position()
+                == self.media_player.duration()
             ):
                 self.media_player.setPosition(0)
                 self.media_player.play()
@@ -775,7 +808,10 @@ class AudioApp(QWidget):
 
     def reset_audio(self):
         """Reset the audio playback to the beginning."""
-        if self.media_player.playbackState() != QMediaPlayer.PlaybackState.StoppedState:
+        if (
+            self.media_player.playbackState()
+            != QMediaPlayer.PlaybackState.StoppedState
+        ):
             self.user_stopped = True  # Prevent Play All logic
             self.fade_out()
 
@@ -792,7 +828,10 @@ class AudioApp(QWidget):
 
     def fade_out(self):
         """Start the fade out process."""
-        if self.media_player.playbackState() == QMediaPlayer.PlaybackState.StoppedState:
+        if (
+            self.media_player.playbackState()
+            == QMediaPlayer.PlaybackState.StoppedState
+        ):
             return
 
         # Store current volume
@@ -815,7 +854,9 @@ class AudioApp(QWidget):
             self.fade_timer.stop()
             self.audio_output.setVolume(0)
             self.media_player.stop()
-            self.audio_output.setVolume(self.original_volume)  # Restore original volume
+            self.audio_output.setVolume(
+                self.original_volume
+            )  # Restore original volume
 
             # Reset UI as before
             self.progress_bar.setValue(0)
@@ -842,7 +883,10 @@ class AudioApp(QWidget):
 
     def update_progress(self):
         """Update the progress bar and time label based on the current playback position."""
-        if self.media_player.playbackState() != QMediaPlayer.PlaybackState.StoppedState:
+        if (
+            self.media_player.playbackState()
+            != QMediaPlayer.PlaybackState.StoppedState
+        ):
             duration = self.media_player.duration()
             position = self.media_player.position()
 
@@ -911,13 +955,18 @@ class AudioApp(QWidget):
                 try:
                     # Convert the saved URL back to a local path
                     last_track_url = QUrl(self.last_track)
-                    if last_track_url.isValid() and last_track_url.isLocalFile():
+                    if (
+                        last_track_url.isValid()
+                        and last_track_url.isLocalFile()
+                    ):
                         last_track_path = Path(last_track_url.toLocalFile())
                         if last_track_path.exists():
                             # Find the track by comparing the full path
                             for i in range(self.file_list.count()):
                                 item = self.file_list.item(i)
-                                item_path = Path(self.current_folder) / item.text()
+                                item_path = (
+                                    Path(self.current_folder) / item.text()
+                                )
                                 if item_path == last_track_path:
                                     self.file_list.setCurrentItem(item)
                                     break
@@ -988,7 +1037,9 @@ class AudioApp(QWidget):
 
         # Track info
         if "tracknumber" in metadata:
-            track_num = metadata["tracknumber"].split("/")[0]  # Handle "1/10" format
+            track_num = metadata["tracknumber"].split("/")[
+                0
+            ]  # Handle "1/10" format
             display.append(f"<b>Track:</b> {track_num}")
 
         # Technical info
@@ -1056,7 +1107,9 @@ class AudioApp(QWidget):
             # For FLAC files with cover art
             if file_path.suffix.lower() == ".flac":
                 for block in audio.metadata_blocks:
-                    if hasattr(block, "type") and block.type == 6:  # Picture block
+                    if (
+                        hasattr(block, "type") and block.type == 6
+                    ):  # Picture block
                         pixmap = QPixmap()
                         pixmap.loadFromData(block.data)
                         if not pixmap.isNull():
@@ -1102,10 +1155,16 @@ class AudioApp(QWidget):
         else:
             self.config.set(self.CONFIG_SECTION, "last_track", "")
 
-        self.config.set(self.CONFIG_SECTION, "volume", str(self.volume_slider.value()))
+        self.config.set(
+            self.CONFIG_SECTION, "volume", str(self.volume_slider.value())
+        )
         self.config.set(self.CONFIG_SECTION, "speed", str(self.slider.value()))
-        self.config.set(self.CONFIG_SECTION, "repeat", str(self.btn_repeat.isChecked()))
-        self.config.set(self.CONFIG_SECTION, "mute", str(self.btn_mute.isChecked()))
+        self.config.set(
+            self.CONFIG_SECTION, "repeat", str(self.btn_repeat.isChecked())
+        )
+        self.config.set(
+            self.CONFIG_SECTION, "mute", str(self.btn_mute.isChecked())
+        )
         self.config.set(
             self.CONFIG_SECTION, "play_all", str(self.btn_play_all.isChecked())
         )
@@ -1158,22 +1217,33 @@ class AudioApp(QWidget):
         elif key == Qt.Key.Key_Escape:
             self.reset_audio()
 
-        elif key == Qt.Key.Key_O and modifiers == Qt.KeyboardModifier.ControlModifier:
+        elif (
+            key == Qt.Key.Key_O
+            and modifiers == Qt.KeyboardModifier.ControlModifier
+        ):
             self.open_file()
 
-        elif key == Qt.Key.Key_M and modifiers == Qt.KeyboardModifier.ControlModifier:
+        elif (
+            key == Qt.Key.Key_M
+            and modifiers == Qt.KeyboardModifier.ControlModifier
+        ):
             self.btn_mute.toggle()
 
-        elif key == Qt.Key.Key_R and modifiers == Qt.KeyboardModifier.ControlModifier:
+        elif (
+            key == Qt.Key.Key_R
+            and modifiers == Qt.KeyboardModifier.ControlModifier
+        ):
             self.btn_repeat.toggle()
 
         elif (
-            key == Qt.Key.Key_Plus and modifiers == Qt.KeyboardModifier.ControlModifier
+            key == Qt.Key.Key_Plus
+            and modifiers == Qt.KeyboardModifier.ControlModifier
         ):
             self.slider.setValue(min(150, self.slider.value() + 10))
 
         elif (
-            key == Qt.Key.Key_Minus and modifiers == Qt.KeyboardModifier.ControlModifier
+            key == Qt.Key.Key_Minus
+            and modifiers == Qt.KeyboardModifier.ControlModifier
         ):
             self.slider.setValue(max(50, self.slider.value() - 10))
 
