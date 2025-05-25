@@ -13,6 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Install Qt6 dependencies
+        run: sudo apt-get update && sudo apt-get install -y qt6-base-dev qt6-base-bin
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
