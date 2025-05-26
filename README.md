@@ -2,8 +2,7 @@
 
 **Mini Player** is a sleek and modern desktop music player built with PyQt6. It provides a lightweight, intuitive interface for playing audio files with smart features like playback speed control, volume adjustment, and smooth track title scrolling — all wrapped in a stylish UI.
 
-[![Build and Release Mini Player](https://github.com/Mohabdo21/mini-player/actions/workflows/release.yml/badge.svg)](https://github.com/Mohabdo21/mini-player/actions/workflows/release.yml)
----
+## [![Build and Release Mini Player](https://github.com/Mohabdo21/mini-player/actions/workflows/release.yml/badge.svg)](https://github.com/Mohabdo21/mini-player/actions/workflows/release.yml)
 
 ## ✨ Features
 
@@ -38,7 +37,7 @@
 ```bash
 git clone https://github.com/Mohabdo21/mini-player.git
 cd mini-player
-pip install -e .
+pip install -r requirements.txt
 ```
 
 ### Run the Application
@@ -108,11 +107,13 @@ mini-player/
 ### Module Overview
 
 - **core**: Contains the business logic and data handling
+
   - `audio_player.py`: Core audio playback functionality
   - `config_manager.py`: Settings management
   - `track_manager.py`: Track list and file system operations
 
 - **ui**: User interface components
+
   - `main_window.py`: Main application window
   - `playlist_widget.py`: Custom playlist widget
 
