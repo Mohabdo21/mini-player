@@ -36,5 +36,5 @@ rich==14.0.0
 SecretStorage==3.3.3
 setuptools==79.0.0
 twine==6.1.0
-urllib3==2.5.0
+urllib3==2.6.3
 zstandard==0.23.0
