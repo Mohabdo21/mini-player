@@ -1,6 +1,6 @@
-# 🎵 Mini Player — PyQt6 Music Player
+# 🎵 Mini Player - PyQt6 Music Player
 
-**Mini Player** is a sleek and modern desktop music player built with PyQt6. It provides a lightweight, intuitive interface for playing audio files with smart features like playback speed control, volume adjustment, and smooth track title scrolling — all wrapped in a stylish UI.
+**Mini Player** is a sleek and modern desktop music player built with PyQt6. It provides a lightweight, intuitive interface for playing audio files with smart features like playback speed control, volume adjustment, and smooth track title scrolling - all wrapped in a stylish UI.
 
 ## [![Build and Release Mini Player](https://github.com/Mohabdo21/mini-player/actions/workflows/release.yml/badge.svg)](https://github.com/Mohabdo21/mini-player/actions/workflows/release.yml)
 
@@ -9,7 +9,7 @@
 - 🎧 **Play MP3, FLAC, WAV, OGG files** from folders or single files
 - 📂 File browser with list display of tracks
 - ▶️ Pause, resume, stop with responsive controls
-- 🎚 Adjustable **playback speed** (0.5x–1.5x)
+- 🎚 Adjustable **playback speed** (0.5x-1.5x)
 - 📈 Smooth **progress bar seeking**
 - ⏳ Real-time time labels (`00:00 / 03:45`)
 - 🔁 Repeat track toggle
@@ -145,4 +145,4 @@ Settings are stored in `mini_player.ini` and include:
 
 ## 🪪 License
 
-MIT License — free to use, modify, and distribute.
+MIT License - free to use, modify, and distribute.

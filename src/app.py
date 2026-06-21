@@ -706,7 +706,7 @@ class AudioApp(QWidget):
 
     def scroll_track_title(self):
         """Scroll the track title if it exceeds the label width."""
-        spacer = "   —   "
+        spacer = "   -   "
         full_text = self.track_title + spacer
         metrics = QFontMetrics(self.track_label.font())
 
@@ -800,7 +800,7 @@ class AudioApp(QWidget):
                     self.play_audio()
                     return
 
-            # End of playlist or playback — update UI
+            # End of playlist or playback - update UI
             self.btn_play_pause.setIcon(QIcon(self.get_icon_path("play.png")))
             self.btn_reset.setDisabled(True)
             self.timer.stop()

@@ -904,7 +904,7 @@ class MainWindow(QWidget):
 
     def scroll_track_title(self) -> None:
         """Scroll the track title if it exceeds the label width."""
-        spacer = "   —   "
+        spacer = "   -   "
         full_text = self.track_title + spacer
         metrics = QFontMetrics(self.track_label.font())
 
